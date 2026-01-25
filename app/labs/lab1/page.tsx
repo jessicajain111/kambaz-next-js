@@ -48,7 +48,7 @@ export default function Lab1() {
                     <li>Serve and enjoy!</li>
                 </ol>
                 My favorite recipe:
-                 <ol id="wd-cereal">
+                <ol id="wd-your-favorite-recipe">
                     <li>Pour cereal into your bowl</li>
                     <li>Pour in your milk after</li>
                     <li>Take your bowl of cereal and warm up for 30 seconds in the microwave</li>
@@ -178,101 +178,113 @@ export default function Lab1() {
                     defaultValue="Wonderland"
                     title="The last name"
                     id="wd-text-fields-last-name" />
-                <br />
-                    <label htmlFor="wd-text-fields-email">Email:</label>
-                    <input
-                    type="email"
-                    placeholder="jdoe@email.com"
-                    id="wd-text-fields-email"
-                /><br />
+                
+                <h5>Text boxes</h5>
+                <label>Biography:</label><br/>
+                <textarea id="wd-textarea" cols={30} rows={10}>
+                    Nullam congue tincidunt ex et gravida. Aenean porta vel ante vitae consectetur. 
+                    Morbi eu ligula ullamcorper, mollis nisl a, sagittis ipsum. Cras ut malesuada odio. 
+                    Donec non facilisis nisi. Integer fringilla tellus risus, sit amet ultricies dolor maximus ac. 
+                    Mauris ut felis non ligula scelerisque molestie. Sed vel ex varius, luctus turpis ac, lacinia erat. 
+                    Morbi porta quam lobortis dui congue molestie. Integer non pretium augue, eget tristique justo. 
+                    Sed ex erat, maximus eget diam ut, facilisis tincidunt justo. Vestibulum tempor et quam quis gravida.
+                </textarea>
+                
+                <h5 id="wd-radio-buttons">Radio buttons</h5>
+                <label>Favorite movie genre:</label><br />
 
-                <label htmlFor="wd-text-fields-phone">Phone:</label>
-                <input
-                    type="tel"
-                    placeholder="123-456-7890"
-                    id="wd-text-fields-phone"
-                />
+                <input type="radio" name="radio-genre" id="wd-radio-comedy"/>
+                <label htmlFor="wd-radio-comedy">Comedy</label><br />
+
+                <input type="radio" name="radio-genre" id="wd-radio-drama"/>
+                <label htmlFor="wd-radio-drama">Drama</label><br />
+
+                <input type="radio" name="radio-genre" id="wd-radio-scifi"/>
+                <label htmlFor="wd-radio-scifi">Science Fiction</label><br />
+                
+                <input type="radio" name="radio-genre" id="wd-radio-fantasy"/>
+                <label htmlFor="wd-radio-fantasy">Fantasy</label>
+                
+                <h5 id="wd-checkboxes">Checkboxes</h5>
+                <label>Favorite movie genre:</label><br/>
+
+                <input type="checkbox" name="check-genre" id="wd-chkbox-comedy"/>
+                <label htmlFor="wd-chkbox-comedy">Comedy</label><br/>
+
+                <input type="checkbox" name="check-genre" id="wd-chkbox-drama"/>
+                <label htmlFor="wd-chkbox-drama">Drama</label><br/>
+
+                <input type="checkbox" name="check-genre" id="wd-chkbox-scifi"/>
+                <label htmlFor="wd-chkbox-scifi">Science Fiction</label><br/>
+
+                <input type="checkbox" name="check-genre" id="wd-chkbox-fantasy"/>
+                <label htmlFor="wd-chkbox-fantasy">Fantasy</label>
             </form>
         </div>
-        <div id= "wd-text-area">
-            <h5>Text boxes</h5>
-            <label>Biography:</label><br/>
-            <textarea id="wd-textarea" cols={30} rows={10}>
-                Nullam congue tincidunt ex et gravida. Aenean porta vel ante vitae consectetur. 
-                Morbi eu ligula ullamcorper, mollis nisl a, sagittis ipsum. Cras ut malesuada odio. 
-                Donec non facilisis nisi. Integer fringilla tellus risus, sit amet ultricies dolor maximus ac. 
-                Mauris ut felis non ligula scelerisque molestie. Sed vel ex varius, luctus turpis ac, lacinia erat. 
-                Morbi porta quam lobortis dui congue molestie. Integer non pretium augue, eget tristique justo. 
-                Sed ex erat, maximus eget diam ut, facilisis tincidunt justo. Vestibulum tempor et quam quis gravida.
-            </textarea>
-        </div>
-        <div id = "wb-radio-buttons">
-            <h5 id="wd-radio-buttons">Radio buttons</h5>
-            <label>Favorite movie genre:</label><br />
-
-            <input type="radio" name="radio-genre" id="wd-radio-comedy"/>
-            <label htmlFor="wd-radio-comedy">Comedy</label><br />
-
-            <input type="radio" name="radio-genre" id="wd-radio-drama"/>
-            <label htmlFor="wd-radio-drama">Drama</label><br />
-
-            <input type="radio" name="radio-genre" id="wd-radio-scifi"/>
-            <label htmlFor="wd-radio-scifi">Science Fiction</label><br />
-            <input type="radio" name="radio-genre" id="wd-radio-fantasy"/>
-            <label htmlFor="wd-radio-fantasy">Fantasy</label>
-        </div>
-        <div id = "wb-checkboxes">
-            <h5 id="wd-checkboxes">Checkboxes</h5>
-            <label>Favorite movie genre:</label><br/>
-
-            <input type="checkbox" name="check-genre" id="wd-chkbox-comedy"/>
-            <label htmlFor="wd-chkbox-comedy">Comedy</label><br/>
-
-            <input type="checkbox" name="check-genre" id="wd-chkbox-drama"/>
-            <label htmlFor="wd-chkbox-drama">Drama</label><br/>
-
-            <input type="checkbox" name="check-genre" id="wd-chkbox-scifi"/>
-            <label htmlFor="wd-chkbox-scifi">Science Fiction</label><br/>
-
-            <input type="checkbox" name="check-genre" id="wd-chkbox-fantasy"/>
-            <label htmlFor="wd-chkbox-fantasy">Fantasy</label>
-        </div>
-        <div id = "wb-dropdown">
-            <h4 id="wd-dropdowns">Dropdowns</h4>
+        
+        <div id="wd-dropdowns">
+            <h4>Dropdowns</h4>
 
             <h5>Select one</h5>
-            <label  htmlFor="wd-select-one-genre"> Favorite movie genre: </label><br/>
+            <label htmlFor="wd-select-one-genre">Favorite movie genre:</label><br/>
             <select id="wd-select-one-genre">
                 <option value="COMEDY">Comedy</option>
                 <option value="DRAMA">Drama</option>
-                <option selected value="SCIFI">
-                    Science Fiction</option>
+                <option selected value="SCIFI">Science Fiction</option>
                 <option value="FANTASY">Fantasy</option>
             </select>
 
             <h5>Select many</h5>
-            <label  htmlFor="wd-select-many-genre"> Favorite movie genres: </label><br/>
+            <label htmlFor="wd-select-many-genre">Favorite movie genres:</label><br/>
             <select multiple id="wd-select-many-genre">
-                <option value="COMEDY" selected> Comedy          </option>
-                <option value="DRAMA">           Drama           </option>
-                <option value="SCIFI"  selected> Science Fiction </option>
-                <option value="FANTASY">         Fantasy         </option>
+                <option value="COMEDY" selected>Comedy</option>
+                <option value="DRAMA">Drama</option>
+                <option value="SCIFI" selected>Science Fiction</option>
+                <option value="FANTASY">Fantasy</option>
             </select>
         </div>
-        <div id = "wb-hypertext">
+        
+        <h4>Other HTML field types</h4>
+
+        <label htmlFor="wd-text-fields-email">Email:</label>
+        <input
+            type="email"
+            placeholder="jdoe@somewhere.com"
+            id="wd-text-fields-email"
+        /><br/>
+
+        <label htmlFor="wd-text-fields-salary-start">Starting salary:</label>
+        <input
+            type="number"
+            defaultValue="100000"
+            placeholder="1000"
+            id="wd-text-fields-salary-start"
+        /><br/>
+
+        <label htmlFor="wd-text-fields-rating">Rating:</label>
+        <input
+            type="range"
+            defaultValue="4"
+            max="5"
+            id="wd-text-fields-rating"
+        /><br/>
+
+        <label htmlFor="wd-text-fields-dob">Date of birth:</label>
+        <input
+            type="date"
+            defaultValue="2000-01-21"
+            id="wd-text-fields-dob"
+        /><br/>
+        
         <h4>Anchor tag</h4>
         Please
         <a href="https://www.lipsum.com" id="wd-lipsum">click here</a>
         to get dummy text<br/>
-        <h4>Anchor tag</h4>
+        
         Please
-        <a href="https://www.lipsum.com" id="wd-lipsum">click here</a>
+        <a href="https://github.com/jessicajain111" id="wd-github">click here</a>
         to see my github<br/>
-
-        </div>
 
     </div>
   );
 }
-  
-  
