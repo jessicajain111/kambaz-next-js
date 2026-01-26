@@ -4,7 +4,8 @@ export default function CourseStatus() {
         <h2>Course Status</h2>
         <button>Unpublish</button>
         <button>Publish</button>
-        {/* Add any extra content you want */}
+        <button>View Course Stream</button>
+        <button>New Announcements</button>
         <button>View Course Notifications</button>
       </div>
     );
