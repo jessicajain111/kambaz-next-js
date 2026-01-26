@@ -1,7 +1,8 @@
 import { ReactNode } from "react";
-import KambazNavigation from "./Navigation";
+import AccountNavigation from "./Navigation";
+import KambazNavigation from "../Navigation";
 
-export default function KambazLayout({
+export default function AccountLayout({
   children,
 }: Readonly<{ children: ReactNode }>) {
   return (
@@ -11,8 +12,19 @@ export default function KambazLayout({
           <td valign="top" width="200">
             <KambazNavigation />
           </td>
-          <td valign="top" width="100%">
-            {children}
+          <td valign="top">
+            <table>
+              <tbody>
+                <tr>
+                  <td valign="top">
+                    <AccountNavigation />
+                  </td>
+                  <td valign="top" width="100%">
+                    {children}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </td>
         </tr>
       </tbody>
