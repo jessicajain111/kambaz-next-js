@@ -282,7 +282,7 @@ export default function Lab1() {
         to get dummy text<br/>
         
         Please
-        <a href="https://github.com/jessicajain111" id="wd-github">click here</a>
+        <a href="https://github.com/jessicajain111/kambaz-next-js" id="wd-github">click here</a>
         to see my github<br/>
 
     </div>
