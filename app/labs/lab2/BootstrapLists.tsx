@@ -1,6 +1,6 @@
 "use client";
-import { ListGroup, ListGroupItem } from "react-bootstrap";
-
+import ListGroup from "react-bootstrap/ListGroup";           
+import ListGroupItem from "react-bootstrap/ListGroupItem";   
 export default function BootstrapLists() {
   return (
     <div>
