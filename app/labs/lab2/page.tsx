@@ -1,5 +1,5 @@
 import "./index.css";
-import { Container } from "react-bootstrap";
+import Container from "react-bootstrap/Container";  // ← FIXED LINE 2
 import ForegroundColors from "./ForegroundColors";
 import BackgroundColors from "./BackgroundColors";
 import Padding from "./Padding";
@@ -23,6 +23,7 @@ import BootstrapNavigation from "./BootstrapNavigation";
 export default function Lab2() {
   return (
     <Container id="wd-lab2">
+      {/* EVERYTHING BELOW IS IDENTICAL - DON'T CHANGE */}
       <h2>Lab 2 - Cascading Style Sheets</h2>
       <h3>Styling with the STYLE attribute</h3>
       <p>
