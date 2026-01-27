@@ -1,3 +1,4 @@
+"use client";
 import Form from "react-bootstrap/Form";                   
 import FormLabel from "react-bootstrap/FormLabel";         
 import FormControl from "react-bootstrap/FormControl";      
