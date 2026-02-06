@@ -1,3 +1,4 @@
+"use client";
 import "./index.css";
 import { Container } from "react-bootstrap";
 import ForegroundColors from "./ForegroundColors";
@@ -71,6 +72,11 @@ export default function Lab2() {
           </div>
         </div>
       </div>
+      {/* this is parent element with selector .wd-selector-1
+          .wd-selector-2 is a direct child of .wd-selector-1
+          .wd-selector-3 is a direct child of .wd-selector-2 and a descendant of .wd-selector-1
+          .wd-selector-4 is a direct child of .wd-selector-3 and is a descendant of .wd-selector-2 and .wd-selector-1
+      */}
 
       <ForegroundColors />
       <BackgroundColors />

@@ -18,202 +18,46 @@ export default function Dashboard() {
       <h2 id="wd-dashboard-published">Published Courses (12)</h2>
       <hr />
       <div id="wd-dashboard-courses">
-        <Row xs={1} md={5} className="g-4">
-          <Col className="wd-dashboard-course" style={{ width: "300px" }}>
-            <Card>
-              <Link
-                href="/courses/1234/home"
-                className="wd-dashboard-course-link text-decoration-none text-dark"
-              >
-                <CardImg
-                  variant="top"
-                  src="/images/reactjs.jpg"
-                  width="100%"
-                  height={160}
-                />
-                <CardBody>
-                  <CardTitle className="wd-dashboard-course-title text-nowrap overflow-hidden">
-                    CS1234 React JS
-                  </CardTitle>
-                  <CardText
-                    className="wd-dashboard-course-description overflow-hidden"
-                    style={{ height: "100px" }}
-                  >
-                    Full Stack software developer
-                  </CardText>
-                  <Button variant="primary">Go</Button>
-                </CardBody>
-              </Link>
-            </Card>
-          </Col>
-
-          <Col className="wd-dashboard-course" style={{ width: "300px" }}>
-            <Card>
-              <Link
-                href="/courses/1234/home"
-                className="wd-dashboard-course-link text-decoration-none text-dark"
-              >
-                <CardImg
-                  variant="top"
-                  src="/images/reactjs.jpg"
-                  width="100%"
-                  height={160}
-                />
-                <CardBody>
-                  <CardTitle className="wd-dashboard-course-title text-nowrap overflow-hidden">
-                    CS5678 Node.js
-                  </CardTitle>
-                  <CardText
-                    className="wd-dashboard-course-description overflow-hidden"
-                    style={{ height: "100px" }}
-                  >
-                    Backend development
-                  </CardText>
-                  <Button variant="primary">Go</Button>
-                </CardBody>
-              </Link>
-            </Card>
-          </Col>
-
-          <Col className="wd-dashboard-course" style={{ width: "300px" }}>
-            <Card>
-              <Link
-                href="/courses/1234/home"
-                className="wd-dashboard-course-link text-decoration-none text-dark"
-              >
-                <CardImg
-                  variant="top"
-                  src="/images/reactjs.jpg"
-                  width="100%"
-                  height={160}
-                />
-                <CardBody>
-                  <CardTitle className="wd-dashboard-course-title text-nowrap overflow-hidden">
-                    CS9012 MongoDB
-                  </CardTitle>
-                  <CardText
-                    className="wd-dashboard-course-description overflow-hidden"
-                    style={{ height: "100px" }}
-                  >
-                    Database design
-                  </CardText>
-                  <Button variant="primary">Go</Button>
-                </CardBody>
-              </Link>
-            </Card>
-          </Col>
-
-          <Col className="wd-dashboard-course" style={{ width: "300px" }}>
-            <Card>
-              <Link
-                href="/courses/1234/home"
-                className="wd-dashboard-course-link text-decoration-none text-dark"
-              >
-                <CardImg
-                  variant="top"
-                  src="/images/reactjs.jpg"
-                  width="100%"
-                  height={160}
-                />
-                <CardBody>
-                  <CardTitle className="wd-dashboard-course-title text-nowrap overflow-hidden">
-                    CS3456 Python
-                  </CardTitle>
-                  <CardText
-                    className="wd-dashboard-course-description overflow-hidden"
-                    style={{ height: "100px" }}
-                  >
-                    Programming fundamentals
-                  </CardText>
-                  <Button variant="primary">Go</Button>
-                </CardBody>
-              </Link>
-            </Card>
-          </Col>
-
-          <Col className="wd-dashboard-course" style={{ width: "300px" }}>
-            <Card>
-              <Link
-                href="/courses/1234/home"
-                className="wd-dashboard-course-link text-decoration-none text-dark"
-              >
-                <CardImg
-                  variant="top"
-                  src="/images/reactjs.jpg"
-                  width="100%"
-                  height={160}
-                />
-                <CardBody>
-                  <CardTitle className="wd-dashboard-course-title text-nowrap overflow-hidden">
-                    CS7890 TypeScript
-                  </CardTitle>
-                  <CardText
-                    className="wd-dashboard-course-description overflow-hidden"
-                    style={{ height: "100px" }}
-                  >
-                    Type-safe JavaScript
-                  </CardText>
-                  <Button variant="primary">Go</Button>
-                </CardBody>
-              </Link>
-            </Card>
-          </Col>
-
-          <Col className="wd-dashboard-course" style={{ width: "300px" }}>
-            <Card>
-              <Link
-                href="/courses/1234/home"
-                className="wd-dashboard-course-link text-decoration-none text-dark"
-              >
-                <CardImg
-                  variant="top"
-                  src="/images/reactjs.jpg"
-                  width="100%"
-                  height={160}
-                />
-                <CardBody>
-                  <CardTitle className="wd-dashboard-course-title text-nowrap overflow-hidden">
-                    CS2345 Express
-                  </CardTitle>
-                  <CardText
-                    className="wd-dashboard-course-description overflow-hidden"
-                    style={{ height: "100px" }}
-                  >
-                    Web APIs with Express
-                  </CardText>
-                  <Button variant="primary">Go</Button>
-                </CardBody>
-              </Link>
-            </Card>
-          </Col>
-
-          <Col className="wd-dashboard-course" style={{ width: "300px" }}>
-            <Card>
-              <Link
-                href="/courses/1234/home"
-                className="wd-dashboard-course-link text-decoration-none text-dark"
-              >
-                <CardImg
-                  variant="top"
-                  src="/images/reactjs.jpg"
-                  width="100%"
-                  height={160}
-                />
-                <CardBody>
-                  <CardTitle className="wd-dashboard-course-title text-nowrap overflow-hidden">
-                    CS6789 Docker
-                  </CardTitle>
-                  <CardText
-                    className="wd-dashboard-course-description overflow-hidden"
-                    style={{ height: "100px" }}
-                  >
-                    Container orchestration
-                  </CardText>
-                  <Button variant="primary">Go</Button>
-                </CardBody>
-              </Link>
-            </Card>
-          </Col>
+        <Row xs={1} sm={2} lg={4} className="g-4">
+          {[
+            { title: "CS1234 React JS", desc: "Full Stack software developer", img: "/images/reactjs.jpg" },
+            { title: "CS5678 Node.js", desc: "Backend development", img: "/images/backend.jpg" },
+            { title: "CS9012 MongoDB", desc: "Database design", img: "/images/database.jpg" },
+            { title: "CS3456 Python", desc: "Programming fundamentals", img: "/images/ood.jpg" },
+            { title: "CS7890 TypeScript", desc: "Type-safe JavaScript", img: "/images/frontend.jpg" },
+            { title: "CS2345 Express", desc: "Web APIs with Express", img: "/images/backend.jpg" },
+            { title: "CS6789 Docker", desc: "Container orchestration", img: "/images/aws.jpg" },
+            { title: "CS4567 Capstone", desc: "Full stack capstone", img: "/images/capstone.jpg" },
+          ].map((course) => (
+            <Col key={course.title} className="wd-dashboard-course" style={{ minWidth: "280px", maxWidth: "320px" }}>
+              <Card>
+                <Link
+                  href="/courses/1234/home"
+                  className="wd-dashboard-course-link text-decoration-none text-dark"
+                >
+                  <CardImg
+                    variant="top"
+                    src={course.img}
+                    width="100%"
+                    height={160}
+                    alt=""
+                  />
+                  <CardBody>
+                    <CardTitle className="wd-dashboard-course-title text-nowrap overflow-hidden">
+                      {course.title}
+                    </CardTitle>
+                    <CardText
+                      className="wd-dashboard-course-description overflow-hidden"
+                      style={{ height: "100px" }}
+                    >
+                      {course.desc}
+                    </CardText>
+                    <Button variant="primary">Go</Button>
+                  </CardBody>
+                </Link>
+              </Card>
+            </Col>
+          ))}
         </Row>
       </div>
     </div>

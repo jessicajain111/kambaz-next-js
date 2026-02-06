@@ -1,12 +1,14 @@
 "use client";
-import Form from "react-bootstrap/Form";                   
-import FormLabel from "react-bootstrap/FormLabel";         
-import FormControl from "react-bootstrap/FormControl";      
-import FormSelect from "react-bootstrap/FormSelect";        
-import FormCheck from "react-bootstrap/FormCheck";          
-import InputGroup from "react-bootstrap/InputGroup";        
-import Row from "react-bootstrap/Row";                      
-import Col from "react-bootstrap/Col";                      
+import Form from "react-bootstrap/Form";
+import FormLabel from "react-bootstrap/FormLabel";
+import FormControl from "react-bootstrap/FormControl";
+import FormSelect from "react-bootstrap/FormSelect";
+import FormCheck from "react-bootstrap/FormCheck";
+import FormRange from "react-bootstrap/FormRange";
+import InputGroup from "react-bootstrap/InputGroup";
+import InputGroupText from "react-bootstrap/InputGroupText";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";                
 
 export default function BootstrapForms() {
@@ -41,20 +43,20 @@ export default function BootstrapForms() {
       <div id="wd-css-styling-range-and-sliders">
         <h3>Range</h3>
         <FormLabel>Example range</FormLabel>
-        <Form.Range min={0} max={5} step={0.5} />
+        <FormRange min={0} max={5} step={0.5} />
       </div>
 
       <div id="wd-css-styling-addons">
         <h3>Addons</h3>
         <InputGroup className="mb-3">
-          <InputGroup.Text>$</InputGroup.Text>
-          <InputGroup.Text>0.00</InputGroup.Text>
+          <InputGroupText>$</InputGroupText>
+          <InputGroupText>0.00</InputGroupText>
           <FormControl />
         </InputGroup>
         <InputGroup>
           <FormControl />
-          <InputGroup.Text>$</InputGroup.Text>
-          <InputGroup.Text>0.00</InputGroup.Text>
+          <InputGroupText>$</InputGroupText>
+          <InputGroupText>0.00</InputGroupText>
         </InputGroup>
       </div>
 
