@@ -3,16 +3,26 @@ import { ListGroup, Form, Button, InputGroup } from "react-bootstrap";
 import { BsSearch, BsPlusLg, BsGripVertical } from "react-icons/bs";
 import { FaCheckCircle } from "react-icons/fa";
 import { IoEllipsisVertical } from "react-icons/io5";
+import { MdOutlineAssignment } from "react-icons/md";
 
 export default function Assignments() {
   return (
-    <div id="wd-assignments" className="p-3">
-      {/* Top row: title + right‑floated buttons */}
-      <div className="mb-3">
-        <h2 className="d-inline-block me-3">Assignments</h2>
+    <div id="wd-assignments" className="p-4">
+      {/* Top row: Search + Buttons */}
+      <div className="d-flex justify-content-between align-items-center mb-3">
+        {/* Search bar */}
+        <InputGroup style={{ maxWidth: "300px" }}>
+          <InputGroup.Text className="bg-white">
+            <BsSearch />
+          </InputGroup.Text>
+          <Form.Control
+            placeholder="Search..."
+            className="border-start-0"
+          />
+        </InputGroup>
 
-        {/* Right‑floated buttons */}
-        <div className="float-end">
+        {/* Right buttons */}
+        <div>
           <Button variant="secondary" className="me-2">
             <BsPlusLg className="me-1" /> Group
           </Button>
@@ -22,71 +32,75 @@ export default function Assignments() {
         </div>
       </div>
 
-      {/* Search bar row */}
-      <div className="clearfix mb-3">
-        <InputGroup className="w-50">
-          <InputGroup.Text>
-            <BsSearch />
-          </InputGroup.Text>
-          <Form.Control
-            placeholder="Search for Assignment"
-            className="text-start"
-          />
-        </InputGroup>
-      </div>
-
-      {/* Assignment groups – reuse Modules styling ideas */}
-      <ListGroup className="rounded-0" id="wd-assignments-list">
-        {/* Group 1: Assignments 40% */}
-        <ListGroup.Item className="p-0 mb-4 fs-5 border-gray wd-assignment-group">
-          <div className="wd-title p-3 ps-2 bg-secondary">
-            <BsGripVertical className="me-2 fs-4" />
-            Assignments 40%
-            <div className="float-end">
-              <FaCheckCircle className="text-success me-2" />
+      {/* Assignments List */}
+      <ListGroup className="rounded-0">
+        {/* ASSIGNMENTS Group Header */}
+        <ListGroup.Item className="p-0 border-0 mb-3">
+          <div className="bg-secondary p-3 d-flex align-items-center justify-content-between">
+            <div>
+              <BsGripVertical className="me-2 fs-4" />
+              <span className="fw-bold">ASSIGNMENTS</span>
+            </div>
+            <div>
+              <span className="me-3">40% of Total</span>
+              <BsPlusLg className="me-3" />
               <IoEllipsisVertical className="fs-4" />
             </div>
           </div>
 
-          <ListGroup className="wd-assignments-items rounded-0">
-            <ListGroup.Item className="wd-assignment-item p-3 ps-1">
-              <BsGripVertical className="me-2 fs-4" />
-              <span className="fw-bold text-primary me-2">A1</span>
-              <span className="fw-bold">React JS Assignment</span>
-              <div className="text-muted small ms-4">
-                Due Jan 30 at 11:59pm · 100 pts
+          {/* Assignment Items */}
+          <ListGroup className="border-0">
+            {/* A1 */}
+            <ListGroup.Item className="wd-assignment-item border-start border-success border-4 p-3">
+              <div className="d-flex align-items-start">
+                <BsGripVertical className="me-3 fs-4 text-muted" />
+                <MdOutlineAssignment className="me-3 fs-3 text-success" />
+                <div className="flex-grow-1">
+                  <div className="fw-bold">A1</div>
+                  <div className="text-danger small">
+                    Multiple Modules | <span className="text-muted">Not available until</span> May 6 at 12:00am | <span className="text-muted">Due</span> May 13 at 11:59pm | 100 pts
+                  </div>
+                </div>
+                <div>
+                  <FaCheckCircle className="text-success me-2" />
+                  <IoEllipsisVertical className="fs-4" />
+                </div>
               </div>
             </ListGroup.Item>
 
-            <ListGroup.Item className="wd-assignment-item p-3 ps-1">
-              <BsGripVertical className="me-2 fs-4" />
-              <span className="fw-bold text-primary me-2">A2</span>
-              <span className="fw-bold">Node JS Assignment</span>
-              <div className="text-muted small ms-4">
-                Due Feb 6 at 11:59pm · 100 pts
+            {/* A2 */}
+            <ListGroup.Item className="wd-assignment-item border-start border-success border-4 p-3">
+              <div className="d-flex align-items-start">
+                <BsGripVertical className="me-3 fs-4 text-muted" />
+                <MdOutlineAssignment className="me-3 fs-3 text-success" />
+                <div className="flex-grow-1">
+                  <div className="fw-bold">A2</div>
+                  <div className="text-danger small">
+                    Multiple Modules | <span className="text-muted">Not available until</span> May 13 at 12:00am | <span className="text-muted">Due</span> May 20 at 11:59pm | 100 pts
+                  </div>
+                </div>
+                <div>
+                  <FaCheckCircle className="text-success me-2" />
+                  <IoEllipsisVertical className="fs-4" />
+                </div>
               </div>
             </ListGroup.Item>
-          </ListGroup>
-        </ListGroup.Item>
 
-        {/* Group 2: Quizzes 10% (example) */}
-        <ListGroup.Item className="p-0 mb-4 fs-5 border-gray wd-assignment-group">
-          <div className="wd-title p-3 ps-2 bg-secondary">
-            <BsGripVertical className="me-2 fs-4" />
-            Quizzes 10%
-            <div className="float-end">
-              <FaCheckCircle className="text-success me-2" />
-              <IoEllipsisVertical className="fs-4" />
-            </div>
-          </div>
-
-          <ListGroup className="wd-assignments-items rounded-0">
-            <ListGroup.Item className="wd-assignment-item p-3 ps-1">
-              <BsGripVertical className="me-2 fs-4" />
-              <span className="fw-bold text-primary me-2">Q1</span>
-              <span className="fw-bold">HTML & CSS Quiz</span>
-              <div className="text-muted small ms-4">
-                Due Feb 3 at 11:59pm · 20 pts
+            {/* A3 */}
+            <ListGroup.Item className="wd-assignment-item border-start border-success border-4 p-3">
+              <div className="d-flex align-items-start">
+                <BsGripVertical className="me-3 fs-4 text-muted" />
+                <MdOutlineAssignment className="me-3 fs-3 text-success" />
+                <div className="flex-grow-1">
+                  <div className="fw-bold">A3</div>
+                  <div className="text-danger small">
+                    Multiple Modules | <span className="text-muted">Not available until</span> May 20 at 12:00am | <span className="text-muted">Due</span> May 27 at 11:59pm | 100 pts
+                  </div>
+                </div>
+                <div>
+                  <FaCheckCircle className="text-success me-2" />
+                  <IoEllipsisVertical className="fs-4" />
+                </div>
               </div>
             </ListGroup.Item>
           </ListGroup>
