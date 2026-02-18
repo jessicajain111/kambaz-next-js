@@ -1,0 +1,23 @@
+[
+    { "_id": "123", "firstName": "Alice", "lastName": "Wonderland",
+      "loginId": "001234561S", "section": "S101", "role": "STUDENT",
+      "lastActivity": "2024-01-01", "totalActivity": "10:00:00" },
+    { "_id": "234", "firstName": "Bob", "lastName": "Builder",
+      "loginId": "001234562S", "section": "S101", "role": "STUDENT",
+      "lastActivity": "2024-01-01", "totalActivity": "10:00:00" },
+    { "_id": "345", "firstName": "Charlie", "lastName": "Brown",
+      "loginId": "001234563S", "section": "S101", "role": "STUDENT",
+      "lastActivity": "2024-01-01", "totalActivity": "10:00:00" },
+    { "_id": "456", "firstName": "Dana", "lastName": "Scully",
+      "loginId": "001234564S", "section": "S101", "role": "STUDENT",
+      "lastActivity": "2024-01-01", "totalActivity": "10:00:00" },
+    { "_id": "567", "firstName": "Eric", "lastName": "Cartman",
+      "loginId": "001234565S", "section": "S101", "role": "STUDENT",
+      "lastActivity": "2024-01-01", "totalActivity": "10:00:00" },
+    { "_id": "789", "firstName": "Frank", "lastName": "Castle",
+      "loginId": "001234566S", "section": "S102", "role": "TA",
+      "lastActivity": "2024-01-01", "totalActivity": "10:00:00" },
+    { "_id": "890", "firstName": "Grace", "lastName": "Hopper",
+      "loginId": "001234567S", "section": "S102", "role": "FACULTY",
+      "lastActivity": "2024-01-01", "totalActivity": "10:00:00" }
+  ]

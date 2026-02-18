@@ -1,4 +1,5 @@
-"use client"
+"use client";
+
 import { Table } from "react-bootstrap";
 import { FaUserCircle } from "react-icons/fa";
 import { useParams } from "next/navigation";
@@ -6,7 +7,7 @@ import * as db from "../../../../database";
 
 export default function PeopleTable() {
   const { cid } = useParams();
-  const { users, enrollments } = db;
+  const { users, enrollments } = db as any;
 
   return (
     <div id="wd-people-table">
@@ -25,7 +26,8 @@ export default function PeopleTable() {
           {(users as any[])
             .filter((usr) =>
               (enrollments as any[]).some(
-                (enrollment) => enrollment.user === usr._id && enrollment.course === cid
+                (enrollment) =>
+                  enrollment.user === usr._id && enrollment.course === cid
               )
             )
             .map((user: any) => (

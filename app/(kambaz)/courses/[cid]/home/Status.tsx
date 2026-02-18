@@ -4,16 +4,13 @@ import { BiImport } from "react-icons/bi";
 import { LiaFileImportSolid } from "react-icons/lia";
 import { Button } from "react-bootstrap";
 
-export default function CourseStatus() {
+export default function CourseStatus({ course }: { course?: any }) {
   return (
     <div id="wd-course-status" style={{ width: "350px" }}>
-      <h2>Course Status</h2>
+      <h2>{course?.name ?? "Course Status"}</h2>
       <div className="d-flex">
         <div className="w-50 pe-1">
-          <Button
-            variant="secondary"
-            className="w-100 text-nowrap"
-          >
+          <Button variant="secondary" className="w-100 text-nowrap">
             <MdDoNotDisturbAlt className="me-2 fs-5" /> Unpublish
           </Button>
         </div>
