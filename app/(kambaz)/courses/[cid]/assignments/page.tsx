@@ -16,7 +16,7 @@ export default function Assignments() {
   return (
     <div id="wd-assignments">
       <ListGroup className="rounded-0" id="wd-assignments">
-        <ListGroupItem className="p-0">
+/Users/jessicajain/2026/winter/webdev/kambaz-next-js/app/(kambaz)/courses/[cid]/grades        <ListGroupItem className="p-0">
           <div className="wd-title p-3 ps-2 bg-secondary">
             <BsGripVertical className="me-2 fs-3" /> ASSIGNMENTS
           </div>
