@@ -30,10 +30,7 @@ export default function Assignments() {
           <p>Multiple Modules | <b>Not available until</b> May 20 at 12:00am | <b>Due</b> May 27 at 11:59pm | 100 pts</p>
         </li>
       </ul>
-
-      <h3>QUIZZES 0% of Total <button>+</button></h3>
-      <h3>EXAMS 0% of Total <button>+</button></h3>
-      <h3>PROJECT 0% of Total <button>+</button></h3>
+    
     </div>
   );
 }
