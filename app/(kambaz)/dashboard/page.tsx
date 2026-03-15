@@ -1,91 +1,83 @@
+"use client";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addNewCourse, deleteCourse, updateCourse } from "../courses/reducer";
+import { RootState } from "../store";
 import Link from "next/link";
-import Image from "next/image";
 
 export default function Dashboard() {
+  const { courses } = useSelector((state: RootState) => state.coursesReducer);
+  const dispatch = useDispatch();
+
+  const [course, setCourse] = useState<any>({
+    _id: "0", name: "New Course", number: "New Number",
+    startDate: "2023-09-10", endDate: "2023-12-15",
+    image: "/images/reactjs.jpg", description: "New Description",
+  });
+
   return (
     <div id="wd-dashboard">
       <h1 id="wd-dashboard-title">Dashboard</h1>
       <hr />
-      <h2 id="wd-dashboard-published">Published Courses (7)</h2>
+      <h5>New Course
+        <button className="btn btn-primary float-end"
+          id="wd-add-new-course-click"
+          onClick={() => dispatch(addNewCourse(course))}>
+          Add
+        </button>
+        <button className="btn btn-warning float-end me-2"
+          id="wd-update-course-click"
+          onClick={() => dispatch(updateCourse(course))}>
+          Update
+        </button>
+      </h5>
+      <br />
+      <input value={course.name} className="form-control mb-2"
+        onChange={(e) => setCourse({ ...course, name: e.target.value })} />
+      <textarea value={course.description} className="form-control mb-2" rows={3}
+        onChange={(e) => setCourse({ ...course, description: e.target.value })} />
       <hr />
 
-      <div id="wd-dashboard-courses">
-        <div className="wd-dashboard-course">
-          <Link href="/courses/1234" className="wd-dashboard-course-link">
-            <Image src="/images/reactjs.jpg" width={200} height={150} alt="React" />
-            <div>
-              <h5>CS1234 React JS</h5>
-              <p>Full Stack Development</p>
-              <button>Go</button>
-            </div>
-          </Link>
-        </div>
+      <h2 id="wd-dashboard-published">
+        Published Courses ({courses.length})
+      </h2>
+      <hr />
 
-        <div className="wd-dashboard-course">
-          <Link href="/courses/2345" className="wd-dashboard-course-link">
-            <Image src="/images/backend.jpg" width={200} height={150} alt="backend" />
-            <div>
-              <h5>CS2345 Node JS</h5>
-              <p>Backend Development</p>
-              <button>Go</button>
+      <div id="wd-dashboard-courses" className="row row-cols-1 row-cols-md-5 g-4">
+        {courses.map((c: any) => (
+          <div key={c._id} className="wd-dashboard-course col" style={{ width: "300px" }}>
+            <div className="card h-100">
+              <img src="/images/reactjs.jpg" className="card-img-top"
+                style={{ height: "150px", objectFit: "cover" }} alt={c.name} />
+              <div className="card-body d-flex flex-column">
+                <h5 className="card-title overflow-hidden"
+                  style={{ maxHeight: "50px" }}>
+                  {c.name}
+                </h5>
+                <p className="card-text overflow-hidden flex-fill"
+                  style={{ maxHeight: "100px", fontSize: "14px" }}>
+                  {c.description}
+                </p>
+                <div className="mt-2">
+                  <Link href={`/courses/${c._id}/home`}
+                    className="btn btn-primary me-2">
+                    Go
+                  </Link>
+                  <button className="btn btn-warning me-2"
+                    id="wd-edit-course-click"
+                    onClick={(e) => { e.preventDefault(); setCourse(c); }}>
+                    Edit
+                  </button>
+                  <button className="btn btn-danger"
+                    id="wd-delete-course-click"
+                    onClick={(e) => { e.preventDefault(); dispatch(deleteCourse(c._id)); }}>
+                    Delete
+                  </button>
+                </div>
+              </div>
             </div>
-          </Link>
-        </div>
-
-        <div className="wd-dashboard-course">
-          <Link href="/courses/3456" className="wd-dashboard-course-link">
-            <Image src="/images/database.jpg" width={200} height={150} alt="databases" />
-            <div>
-              <h5>CS3456 MongoDB</h5>
-              <p>Database Systems</p>
-              <button>Go</button>
-            </div>
-          </Link>
-        </div>
-
-        <div className="wd-dashboard-course">
-          <Link href="/courses/4567" className="wd-dashboard-course-link">
-            <Image src="/images/frontend.jpg" width={200} height={150} alt="frontend" />
-            <div>
-              <h5>CS4567 Web Dev</h5>
-              <p>Frontend Engineering</p>
-              <button>Go</button>
-            </div>
-          </Link>
-        </div>
-
-        <div className="wd-dashboard-course">
-          <Link href="/courses/5678" className="wd-dashboard-course-link">
-            <Image src="/images/ood.jpg" width={200} height={150} alt="ood" />
-            <div>
-              <h5>CS5678 Software Design</h5>
-              <p>Object-Oriented Design</p>
-              <button>Go</button>
-            </div>
-          </Link>
-        </div>
-
-        <div className="wd-dashboard-course">
-          <Link href="/courses/6789" className="wd-dashboard-course-link">
-            <Image src="/images/aws.jpg" width={200} height={150} alt="aws" />
-            <div>
-              <h5>CS6789 Cloud Computing</h5>
-              <p>AWS & Deployment</p>
-              <button>Go</button>
-            </div>
-          </Link>
-        </div>
-
-        <div className="wd-dashboard-course">
-          <Link href="/courses/7890" className="wd-dashboard-course-link">
-            <Image src="/images/capstone.jpg" width={200} height={150} alt="capstone" />
-            <div>
-              <h5>CS7890 Capstone</h5>
-              <p>Senior Project</p>
-              <button>Go</button>
-            </div>
-          </Link>
-        </div>
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -1,33 +1,17 @@
 import { ReactNode } from "react";
 import AccountNavigation from "./Navigation";
-import KambazNavigation from "../Navigation";
 
 export default function AccountLayout({
   children,
 }: Readonly<{ children: ReactNode }>) {
   return (
-    <table>
-      <tbody>
-        <tr>
-          <td valign="top" width="200">
-            <KambazNavigation />
-          </td>
-          <td valign="top">
-            <table>
-              <tbody>
-                <tr>
-                  <td valign="top">
-                    <AccountNavigation />
-                  </td>
-                  <td valign="top" width="100%">
-                    {children}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div className="d-flex">
+      <div>
+        <AccountNavigation />
+      </div>
+      <div className="flex-fill p-4">
+        {children}
+      </div>
+    </div>
   );
 }

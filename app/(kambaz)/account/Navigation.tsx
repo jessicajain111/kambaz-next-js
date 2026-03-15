@@ -1,23 +1,27 @@
+"use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
 
-export default function KambazNavigation() {
+export default function AccountNavigation() {
+  const { currentUser } = useSelector((state: RootState) => state.accountReducer);
+  const links = currentUser ? ["profile"] : ["signin", "signup"];
+  const pathname = usePathname();
+
   return (
-    <div id="wd-kambaz-navigation">
-      <a
-        href="https://www.northeastern.edu/"
-        id="wd-neu-link"
-        target="_blank"
-      >
-        Northeastern
-      </a>
-      <br />
-
-      <Link href="/account" id="wd-account-link">Account</Link><br />
-      <Link href="/dashboard" id="wd-dashboard-link">Dashboard</Link><br />
-      <Link href="/dashboard" id="wd-course-link">Courses</Link><br />
-      <Link href="/calendar" id="wd-calendar-link">Calendar</Link><br />
-      <Link href="/inbox" id="wd-inbox-link">Inbox</Link><br />
-      <Link href="/labs" id="wd-labs-link">Labs</Link><br />
+    <div id="wd-account-navigation">
+      {links.map((link) => (
+        <div key={link}>
+          <Link
+            href={`/account/${link}`}
+            className={pathname.endsWith(link) ? "text-danger" : ""}
+          >
+            {link.charAt(0).toUpperCase() + link.slice(1)}
+          </Link>
+          <br />
+        </div>
+      ))}
     </div>
   );
 }

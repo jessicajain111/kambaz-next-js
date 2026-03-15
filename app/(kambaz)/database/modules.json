@@ -1,0 +1,58 @@
+[
+    { "_id": "M101", "name": "Introduction to Rocket Propulsion", "course": "RS101",
+      "lessons": [
+        { "_id": "L101", "name": "History of Rocketry" },
+        { "_id": "L102", "name": "Rocket Propulsion Fundamentals" },
+        { "_id": "L103", "name": "Rocket Engine Types" }
+      ]
+    },
+    { "_id": "M102", "name": "Fuel Chemistry", "course": "RS101",
+      "lessons": [
+        { "_id": "L104", "name": "Liquid Fuels" },
+        { "_id": "L105", "name": "Solid Fuels" },
+        { "_id": "L106", "name": "Hybrid Fuels" }
+      ]
+    },
+    { "_id": "M103", "name": "Practical Applications", "course": "RS101",
+      "lessons": [
+        { "_id": "L107", "name": "Launch Systems" },
+        { "_id": "L108", "name": "Trajectory Planning" }
+      ]
+    },
+    { "_id": "M201", "name": "Fluid Dynamics", "course": "RS102",
+      "lessons": [
+        { "_id": "L201", "name": "Bernoulli's Principle" },
+        { "_id": "L202", "name": "Airflow Patterns" }
+      ]
+    },
+    { "_id": "M202", "name": "Airfoil Design", "course": "RS102",
+      "lessons": [
+        { "_id": "L203", "name": "Lift and Drag" },
+        { "_id": "L204", "name": "Wing Design" }
+      ]
+    },
+    { "_id": "M203", "name": "Aircraft Design", "course": "RS102",
+      "lessons": [
+        { "_id": "L205", "name": "Aerodynamic Considerations" },
+        { "_id": "L206", "name": "Design Optimization" }
+      ]
+    },
+    { "_id": "M301", "name": "Spacecraft Structure", "course": "RS103",
+      "lessons": [
+        { "_id": "L301", "name": "Structural Materials" },
+        { "_id": "L302", "name": "Load Analysis" }
+      ]
+    },
+    { "_id": "M302", "name": "Power Systems", "course": "RS103",
+      "lessons": [
+        { "_id": "L303", "name": "Solar Panels" },
+        { "_id": "L304", "name": "Battery Systems" }
+      ]
+    },
+    { "_id": "M303", "name": "Thermal Control", "course": "RS103",
+      "lessons": [
+        { "_id": "L305", "name": "Heat Management" },
+        { "_id": "L306", "name": "Insulation Systems" }
+      ]
+    }
+  ]
