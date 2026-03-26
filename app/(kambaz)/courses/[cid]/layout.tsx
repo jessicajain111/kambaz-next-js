@@ -9,7 +9,7 @@ import { RootState } from "../../store";
 export default function CoursesLayout({ children }: { children: ReactNode }) {
   const { cid } = useParams();
   const { courses } = useSelector((state: RootState) => state.coursesReducer);
-  const course = courses.find((course: any) => course._id === cid);
+  const course = courses.find((course: any) => course._id === cid) as any;
   const [showNav, setShowNav] = useState(true);
 
   return (
