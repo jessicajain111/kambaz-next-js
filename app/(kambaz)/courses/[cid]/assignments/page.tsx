@@ -1,8 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteAssignment } from "./reducer";
+import { deleteAssignment, setAssignments } from "./reducer";
 import { RootState } from "@/app/(kambaz)/store";
 import Link from "next/link";
 import { BsGripVertical } from "react-icons/bs";
@@ -10,30 +10,41 @@ import { FaCheckCircle } from "react-icons/fa";
 import { IoEllipsisVertical } from "react-icons/io5";
 import { FaTrash } from "react-icons/fa";
 import { BsFileText } from "react-icons/bs";
+import * as client from "../../client";
 
 export default function Assignments() {
   const { cid } = useParams();
   const router = useRouter();
   const dispatch = useDispatch();
   const { assignments } = useSelector((state: RootState) => state.assignmentsReducer);
-  const filteredAssignments = (assignments as any[]).filter((a) => a.course === cid);
   const [showConfirm, setShowConfirm] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
+
+  const fetchAssignments = async () => {
+    const assignments = await client.findAssignmentsForCourse(cid as string);
+    dispatch(setAssignments(assignments));
+  };
+
+  useEffect(() => {
+    fetchAssignments();
+  }, []);
 
   const handleDeleteClick = (id: string) => {
     setSelectedId(id);
     setShowConfirm(true);
   };
 
-  const confirmDelete = () => {
-    if (selectedId) dispatch(deleteAssignment(selectedId));
+  const confirmDelete = async () => {
+    if (selectedId) {
+      await client.deleteAssignment(selectedId);
+      dispatch(deleteAssignment(selectedId));
+    }
     setShowConfirm(false);
     setSelectedId(null);
   };
 
   return (
     <div id="wd-assignments">
-      {/* Top Controls */}
       <div className="d-flex align-items-center justify-content-between mb-3">
         <input className="form-control w-25"
           placeholder="Search for Assignment" />
@@ -48,7 +59,6 @@ export default function Assignments() {
       </div>
       <hr />
 
-      {/* Confirm Delete Dialog */}
       {showConfirm && (
         <div className="modal d-block" style={{ background: "rgba(0,0,0,0.5)" }}>
           <div className="modal-dialog">
@@ -73,12 +83,9 @@ export default function Assignments() {
         </div>
       )}
 
-      {/* Assignments List */}
       <ul id="wd-assignment-list" className="list-group rounded-0">
         <li className="list-group-item p-0">
-          {/* Group Header */}
-          <div className="d-flex align-items-center justify-content-between
-            p-3 bg-secondary">
+          <div className="d-flex align-items-center justify-content-between p-3 bg-secondary">
             <div className="d-flex align-items-center gap-2">
               <BsGripVertical className="fs-3" />
               <span>▼</span>
@@ -94,12 +101,10 @@ export default function Assignments() {
             </div>
           </div>
 
-          {/* Assignment Items */}
           <ul className="list-group rounded-0">
-            {filteredAssignments.map((assignment: any) => (
+            {(assignments as any[]).map((assignment: any) => (
               <li key={assignment._id}
-                className="list-group-item d-flex align-items-center
-                  justify-content-between p-3"
+                className="list-group-item d-flex align-items-center justify-content-between p-3"
                 style={{ borderLeft: "3px solid green" }}>
                 <div className="d-flex align-items-center gap-2">
                   <BsGripVertical className="fs-3 text-secondary" />

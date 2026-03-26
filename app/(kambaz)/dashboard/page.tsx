@@ -1,19 +1,82 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addNewCourse, deleteCourse, updateCourse } from "../courses/reducer";
+import { setCourses } from "../courses/reducer";
 import { RootState } from "../store";
 import Link from "next/link";
+import * as client from "../courses/client";
+import * as enrollmentsClient from "../enrollments/client";
 
 export default function Dashboard() {
   const { courses } = useSelector((state: RootState) => state.coursesReducer);
+  const { currentUser } = useSelector((state: RootState) => state.accountReducer);
   const dispatch = useDispatch();
+  const [showAllCourses, setShowAllCourses] = useState(false);
+  const [allCourses, setAllCourses] = useState<any[]>([]);
+  const [enrolledCourses, setEnrolledCourses] = useState<any[]>([]);
 
   const [course, setCourse] = useState<any>({
     _id: "0", name: "New Course", number: "New Number",
     startDate: "2023-09-10", endDate: "2023-12-15",
     image: "/images/reactjs.jpg", description: "New Description",
   });
+
+  const fetchCourses = async () => {
+    try {
+      const myCourses = await client.findMyCourses();
+      setEnrolledCourses(myCourses);
+      dispatch(setCourses(myCourses));
+      const all = await client.fetchAllCourses();
+      setAllCourses(all);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCourses();
+  }, [currentUser]);
+
+  const onAddNewCourse = async () => {
+    const newCourse = await client.createCourse(course);
+    setEnrolledCourses([...enrolledCourses, newCourse]);
+    dispatch(setCourses([...courses, newCourse]));
+  };
+
+  const onDeleteCourse = async (courseId: string) => {
+    await client.deleteCourse(courseId);
+    dispatch(setCourses(courses.filter((c: any) => c._id !== courseId)));
+    setEnrolledCourses(enrolledCourses.filter((c: any) => c._id !== courseId));
+  };
+
+  const onUpdateCourse = async () => {
+    await client.updateCourse(course);
+    dispatch(setCourses(courses.map((c: any) =>
+      c._id === course._id ? course : c
+    )));
+    setEnrolledCourses(enrolledCourses.map((c: any) =>
+      c._id === course._id ? course : c
+    ));
+  };
+
+  const onEnroll = async (courseId: string) => {
+    await enrollmentsClient.enrollUserInCourse(currentUser._id, courseId);
+    const myCourses = await client.findMyCourses();
+    setEnrolledCourses(myCourses);
+    dispatch(setCourses(myCourses));
+  };
+
+  const onUnenroll = async (courseId: string) => {
+    await enrollmentsClient.unenrollUserFromCourse(currentUser._id, courseId);
+    const myCourses = await client.findMyCourses();
+    setEnrolledCourses(myCourses);
+    dispatch(setCourses(myCourses));
+  };
+
+  const isEnrolled = (courseId: string) =>
+    enrolledCourses.some((c: any) => c._id === courseId);
+
+  const displayedCourses = showAllCourses ? allCourses : enrolledCourses;
 
   return (
     <div id="wd-dashboard">
@@ -22,13 +85,17 @@ export default function Dashboard() {
       <h5>New Course
         <button className="btn btn-primary float-end"
           id="wd-add-new-course-click"
-          onClick={() => dispatch(addNewCourse(course))}>
+          onClick={onAddNewCourse}>
           Add
         </button>
         <button className="btn btn-warning float-end me-2"
           id="wd-update-course-click"
-          onClick={() => dispatch(updateCourse(course))}>
+          onClick={onUpdateCourse}>
           Update
+        </button>
+        <button className="btn btn-secondary float-end me-2"
+          onClick={() => setShowAllCourses(!showAllCourses)}>
+          {showAllCourses ? "Show My Courses" : "Show All Courses"}
         </button>
       </h5>
       <br />
@@ -39,12 +106,12 @@ export default function Dashboard() {
       <hr />
 
       <h2 id="wd-dashboard-published">
-        Published Courses ({courses.length})
+        Published Courses ({displayedCourses.length})
       </h2>
       <hr />
 
       <div id="wd-dashboard-courses" className="row row-cols-1 row-cols-md-5 g-4">
-        {courses.map((c: any) => (
+        {displayedCourses.map((c: any) => (
           <div key={c._id} className="wd-dashboard-course col" style={{ width: "300px" }}>
             <div className="card h-100">
               <img src="/images/reactjs.jpg" className="card-img-top"
@@ -58,21 +125,32 @@ export default function Dashboard() {
                   style={{ maxHeight: "100px", fontSize: "14px" }}>
                   {c.description}
                 </p>
-                <div className="mt-2">
+                <div className="mt-2 d-flex flex-wrap gap-2">
                   <Link href={`/courses/${c._id}/home`}
-                    className="btn btn-primary me-2">
+                    className="btn btn-primary">
                     Go
                   </Link>
-                  <button className="btn btn-warning me-2"
+                  <button className="btn btn-warning"
                     id="wd-edit-course-click"
                     onClick={(e) => { e.preventDefault(); setCourse(c); }}>
                     Edit
                   </button>
                   <button className="btn btn-danger"
                     id="wd-delete-course-click"
-                    onClick={(e) => { e.preventDefault(); dispatch(deleteCourse(c._id)); }}>
+                    onClick={(e) => { e.preventDefault(); onDeleteCourse(c._id); }}>
                     Delete
                   </button>
+                  {isEnrolled(c._id) ? (
+                    <button className="btn btn-danger"
+                      onClick={(e) => { e.preventDefault(); onUnenroll(c._id); }}>
+                      Unenroll
+                    </button>
+                  ) : (
+                    <button className="btn btn-success"
+                      onClick={(e) => { e.preventDefault(); onEnroll(c._id); }}>
+                      Enroll
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
