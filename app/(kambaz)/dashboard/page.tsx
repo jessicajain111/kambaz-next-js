@@ -140,16 +140,18 @@ export default function Dashboard() {
                     onClick={(e) => { e.preventDefault(); onDeleteCourse(c._id); }}>
                     Delete
                   </button>
-                  {isEnrolled(c._id) ? (
-                    <button className="btn btn-danger"
-                      onClick={(e) => { e.preventDefault(); onUnenroll(c._id); }}>
-                      Unenroll
-                    </button>
-                  ) : (
-                    <button className="btn btn-success"
-                      onClick={(e) => { e.preventDefault(); onEnroll(c._id); }}>
-                      Enroll
-                    </button>
+                  {showAllCourses && (
+                    isEnrolled(c._id) ? (
+                      <button className="btn btn-danger"
+                        onClick={(e) => { e.preventDefault(); onUnenroll(c._id); }}>
+                        Unenroll
+                      </button>
+                    ) : (
+                      <button className="btn btn-success"
+                        onClick={(e) => { e.preventDefault(); onEnroll(c._id); }}>
+                        Enroll
+                      </button>
+                    )
                   )}
                 </div>
               </div>

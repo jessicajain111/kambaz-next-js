@@ -22,6 +22,16 @@ export default function AccountNavigation() {
           <br />
         </div>
       ))}
+      {currentUser && currentUser.role === "ADMIN" && (
+        <div>
+          <Link
+            href="/account/users"
+            className={pathname.endsWith("users") ? "text-danger" : ""}
+          >
+            Users
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

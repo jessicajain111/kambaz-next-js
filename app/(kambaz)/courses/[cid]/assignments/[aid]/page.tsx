@@ -21,15 +21,20 @@ export default function AssignmentEditor() {
   });
 
   useEffect(() => {
-    if (aid !== "new") {
-      const fetchAssignment = async () => {
-        const assignments = await client.findAssignmentsForCourse(cid as string);
-        const existing = assignments.find((a: any) => a._id === aid);
-        if (existing) setAssignment(existing);
-      };
-      fetchAssignment();
+    if (aid === "new" && cid) {
+      setAssignment((prev: any) => ({ ...prev, course: cid }));
     }
-  }, []);
+  }, [cid, aid]);
+
+  useEffect(() => {
+    if (aid === "new" || !cid) return;
+    const load = async () => {
+      const assignments = await client.findAssignmentsForCourse(cid as string);
+      const existing = assignments.find((a: any) => a._id === aid);
+      if (existing) setAssignment(existing);
+    };
+    void load();
+  }, [cid, aid]);
 
   const handleSave = async () => {
     if (aid === "new") {

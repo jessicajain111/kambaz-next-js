@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteAssignment, setAssignments } from "./reducer";
@@ -20,14 +20,15 @@ export default function Assignments() {
   const [showConfirm, setShowConfirm] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
-  const fetchAssignments = async () => {
-    const assignments = await client.findAssignmentsForCourse(cid as string);
-    dispatch(setAssignments(assignments));
-  };
+  const fetchAssignments = useCallback(async () => {
+    if (!cid) return;
+    const list = await client.findAssignmentsForCourse(cid as string);
+    dispatch(setAssignments(list));
+  }, [cid, dispatch]);
 
   useEffect(() => {
-    fetchAssignments();
-  }, []);
+    void fetchAssignments();
+  }, [fetchAssignments]);
 
   const handleDeleteClick = (id: string) => {
     setSelectedId(id);

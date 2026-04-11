@@ -1,13 +1,24 @@
 "use client";
-import { useState, useEffect } from "react";
+
+import { useState, useEffect, useCallback } from "react";
 import { useParams } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
-import { addModule, deleteModule, updateModule, editModule, setModules } from "./reducer";
+import { editModule, setModules, updateModule as updateModuleAction } from "./reducer";
 import { RootState } from "@/app/(kambaz)/store";
 import ModulesControls from "./ModulesControls";
 import ModuleControlButtons from "./ModuleControlButtons";
 import { BsGripVertical } from "react-icons/bs";
 import * as client from "../../client";
+
+function modulePayload(module: any) {
+  const payload: Record<string, unknown> = {
+    _id: module._id,
+    name: module.name,
+  };
+  if (module.description !== undefined) payload.description = module.description;
+  if (module.lessons !== undefined) payload.lessons = module.lessons;
+  return payload;
+}
 
 export default function Modules() {
   const { cid } = useParams();
@@ -15,31 +26,40 @@ export default function Modules() {
   const { modules } = useSelector((state: RootState) => state.modulesReducer);
   const dispatch = useDispatch();
 
-  const fetchModules = async () => {
-    const modules = await client.findModulesForCourse(cid as string);
-    dispatch(setModules(modules));
-  };
+  const fetchModules = useCallback(async () => {
+    if (!cid) return;
+    const list = await client.findModulesForCourse(cid as string);
+    dispatch(setModules(list));
+  }, [cid, dispatch]);
 
   useEffect(() => {
-    fetchModules();
-  }, []);
+    void fetchModules();
+  }, [fetchModules]);
 
   const onCreateModuleForCourse = async () => {
     if (!cid) return;
-    const newModule = { name: moduleName, course: cid };
-    const module = await client.createModuleForCourse(cid as string, newModule);
-    dispatch(setModules([...modules, module]));
+    const created = await client.createModuleForCourse(cid as string, { name: moduleName });
+    dispatch(setModules([...modules, created]));
     setModuleName("");
   };
 
   const onRemoveModule = async (moduleId: string) => {
-    await client.deleteModule(moduleId);
+    if (!cid) return;
+    await client.deleteModule(cid as string, moduleId);
     dispatch(setModules(modules.filter((m: any) => m._id !== moduleId)));
   };
 
   const onUpdateModule = async (module: any) => {
-    await client.updateModule(module);
-    dispatch(setModules(modules.map((m: any) => m._id === module._id ? module : m)));
+    if (!cid) return;
+    const payload = modulePayload(module);
+    const updated = await client.updateModule(cid as string, payload);
+    dispatch(
+      setModules(
+        modules.map((m: any) =>
+          m._id === module._id ? { ...m, ...updated, editing: false } : m
+        )
+      )
+    );
   };
 
   return (
@@ -63,11 +83,11 @@ export default function Modules() {
                     className="form-control w-50 d-inline-block"
                     defaultValue={module.name}
                     onChange={(e) =>
-                      dispatch(updateModule({ ...module, name: e.target.value }))
+                      dispatch(updateModuleAction({ ...module, name: e.target.value }))
                     }
                     onKeyDown={(e) => {
                       if (e.key === "Enter") {
-                        onUpdateModule({ ...module, editing: false });
+                        void onUpdateModule({ ...module, editing: false });
                       }
                     }}
                   />
@@ -75,7 +95,7 @@ export default function Modules() {
               </div>
               <ModuleControlButtons
                 moduleId={module._id}
-                deleteModule={(moduleId) => onRemoveModule(moduleId)}
+                deleteModule={(moduleId) => void onRemoveModule(moduleId)}
                 editModule={(moduleId) => dispatch(editModule(moduleId))}
               />
             </div>

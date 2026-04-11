@@ -19,10 +19,16 @@ export default function Session({ children }: { children: any }) {
   };
 
   useEffect(() => {
-    fetchProfile();
+    void fetchProfile();
   }, []);
 
-  if (!pending) {
-    return children;
+  if (pending) {
+    return (
+      <div className="p-5 text-center text-muted" id="wd-session-loading">
+        Loading&hellip;
+      </div>
+    );
   }
+
+  return children;
 }
