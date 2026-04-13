@@ -15,6 +15,8 @@ export default function Dashboard() {
   const [allCourses, setAllCourses] = useState<any[]>([]);
   const [enrolledCourses, setEnrolledCourses] = useState<any[]>([]);
 
+  const isFaculty = currentUser?.role === "FACULTY" || currentUser?.role === "ADMIN";
+
   const [course, setCourse] = useState<any>({
     _id: "0", name: "New Course", number: "New Number",
     startDate: "2023-09-10", endDate: "2023-12-15",
@@ -82,27 +84,33 @@ export default function Dashboard() {
     <div id="wd-dashboard">
       <h1 id="wd-dashboard-title">Dashboard</h1>
       <hr />
-      <h5>New Course
-        <button className="btn btn-primary float-end"
-          id="wd-add-new-course-click"
-          onClick={onAddNewCourse}>
-          Add
-        </button>
-        <button className="btn btn-warning float-end me-2"
-          id="wd-update-course-click"
-          onClick={onUpdateCourse}>
-          Update
-        </button>
-        <button className="btn btn-secondary float-end me-2"
-          onClick={() => setShowAllCourses(!showAllCourses)}>
-          {showAllCourses ? "Show My Courses" : "Show All Courses"}
-        </button>
-      </h5>
+      {isFaculty && (
+        <h5>New Course
+          <button className="btn btn-primary float-end"
+            id="wd-add-new-course-click"
+            onClick={onAddNewCourse}>
+            Add
+          </button>
+          <button className="btn btn-warning float-end me-2"
+            id="wd-update-course-click"
+            onClick={onUpdateCourse}>
+            Update
+          </button>
+        </h5>
+      )}
+      <button className="btn btn-secondary float-end me-2"
+        onClick={() => setShowAllCourses(!showAllCourses)}>
+        {showAllCourses ? "My Courses" : "All Courses"}
+      </button>
       <br />
-      <input value={course.name} className="form-control mb-2"
-        onChange={(e) => setCourse({ ...course, name: e.target.value })} />
-      <textarea value={course.description} className="form-control mb-2" rows={3}
-        onChange={(e) => setCourse({ ...course, description: e.target.value })} />
+      {isFaculty && (
+        <>
+          <input value={course.name} className="form-control mb-2"
+            onChange={(e) => setCourse({ ...course, name: e.target.value })} />
+          <textarea value={course.description} className="form-control mb-2" rows={3}
+            onChange={(e) => setCourse({ ...course, description: e.target.value })} />
+        </>
+      )}
       <hr />
 
       <h2 id="wd-dashboard-published">
@@ -130,16 +138,20 @@ export default function Dashboard() {
                     className="btn btn-primary">
                     Go
                   </Link>
-                  <button className="btn btn-warning"
-                    id="wd-edit-course-click"
-                    onClick={(e) => { e.preventDefault(); setCourse(c); }}>
-                    Edit
-                  </button>
-                  <button className="btn btn-danger"
-                    id="wd-delete-course-click"
-                    onClick={(e) => { e.preventDefault(); onDeleteCourse(c._id); }}>
-                    Delete
-                  </button>
+                  {isFaculty && (
+                    <>
+                      <button className="btn btn-warning"
+                        id="wd-edit-course-click"
+                        onClick={(e) => { e.preventDefault(); setCourse(c); }}>
+                        Edit
+                      </button>
+                      <button className="btn btn-danger"
+                        id="wd-delete-course-click"
+                        onClick={(e) => { e.preventDefault(); onDeleteCourse(c._id); }}>
+                        Delete
+                      </button>
+                    </>
+                  )}
                   {showAllCourses && (
                     isEnrolled(c._id) ? (
                       <button className="btn btn-danger"

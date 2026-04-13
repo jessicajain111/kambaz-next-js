@@ -20,7 +20,7 @@ export const signout = async () => {
 };
 
 export const profile = async () => {
-  const response = await axiosWithCredentials.post(`${USERS_API}/profile`);
+  const response = await axiosWithCredentials.get(`${USERS_API}/profile`);
   return response.data;
 };
 
@@ -49,12 +49,12 @@ export const findUserById = async (id: string) => {
   return response.data;
 };
 
-export const deleteUser = async (userId: string) => {
-  const response = await axiosWithCredentials.delete(`${USERS_API}/${userId}`);
+export const createUser = async (user: any) => {
+  const response = await axiosWithCredentials.post(`${USERS_API}`, user);
   return response.data;
 };
 
-export const createUser = async (user: any) => {
-  const response = await axiosWithCredentials.post(USERS_API, user);
+export const deleteUser = async (uid: string) => {
+  const response = await axiosWithCredentials.delete(`${USERS_API}/${uid}`);
   return response.data;
 };
